@@ -20,11 +20,11 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb2d.velocity[0] >= -.01)
+        if(rb2d.velocity[0] > .1)
         {
             transform.localScale = new Vector2(startingScale, transform.localScale.y);
         }
-        else
+        else if(rb2d.velocity[0] < -.1)
         {
             transform.localScale = new Vector2(-startingScale, transform.localScale.y);
         }
@@ -33,23 +33,30 @@ public class Character : MonoBehaviour
             rb2d.velocity = new Vector2(rb2d.velocity[0], jumpForce);
             canJump = false;
         }
-        else if(Input.GetKey("d"))
+        else if (Input.GetKey("d"))
         {
             if (rb2d.velocity[0] < runForce)
             {
-                rb2d.AddForce(new Vector2(runForce,0));
+                rb2d.AddForce(new Vector2(runForce, 0));
             }
         }
         else if (Input.GetKey("a"))
         {
             if (rb2d.velocity[0] > -runForce)
             {
-                rb2d.AddForce(new Vector2(-runForce,0));
+                rb2d.AddForce(new Vector2(-runForce, 0));
             }
-        } else if(Input.GetMouseButtonDown(0))
+        }
+        else if (Input.GetMouseButtonDown(0))
         {
-            
-            sword.transform.localRotation = Quaternion.Euler(-45, 0, -45);
+
+            sword.transform.Rotate = Quaternion.Euler(0, 0, -135);
+            sword.transform.Position = new Vector3(1, 0, 0);
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            sword.transform.Rotate = Quaternion.Euler(0, 0, 135+180);
+            sword.transform.Position = new Vector3(0, 1, 0);
         }
     }
     void OnCollisionEnter2D (Collision2D col)
