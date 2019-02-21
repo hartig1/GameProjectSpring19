@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         startingScale = transform.localScale.x;
+        sword.SetActive(false);     
     }
 
     // Update is called once per frame
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !swordRotated)
         {
+            sword.SetActive(true);
             //sword.transform.Rotate(0, 0, -90);
             if (right)
             {
@@ -51,6 +53,7 @@ public class Character : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(1) && swordRotated)
         {
+            sword.SetActive(false);
             //sword.transform.Rotate(0, 0, 90);
             if (right)
             {
