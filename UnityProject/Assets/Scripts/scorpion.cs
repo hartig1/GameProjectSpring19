@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class scorpion : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class scorpion : MonoBehaviour
     private float walkSpeed = 15;
     private bool dir = true;
     private int timer = 0;
-    private int health = 1;
+    private int health = 2;
     public GameObject scorp;
     // Start is called before the first frame update
     void Start()
@@ -57,7 +58,7 @@ public class scorpion : MonoBehaviour
         if(col.gameObject.tag == "attack")
         {
             health--;
-            if(health <= 0)
+            if (health <= 0)
             {
                 Destroy(this);
                 scorp.SetActive(false);

@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     private float startingScale;
     public GameObject sword;
     private bool swordRotated = false;
-    private bool right = true;
+    public bool right = true;
     private int health = 1;
     private int invinsibleTimer;
     public GameObject player;
@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                sword.transform.eulerAngles = new Vector3(sword.transform.eulerAngles.x, sword.transform.eulerAngles.y, 70);
+                sword.transform.eulerAngles = new Vector3(sword.transform.eulerAngles.x, sword.transform.eulerAngles.y, 100);
             }
             //sword.transform.Rotate(Vector3.right * Time.deltaTime);
             swordRotated = true;
@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                sword.transform.eulerAngles = new Vector3(sword.transform.eulerAngles.x, sword.transform.eulerAngles.y, -20);
+                sword.transform.eulerAngles = new Vector3(sword.transform.eulerAngles.x, sword.transform.eulerAngles.y, 20);
             }
             //sword.transform.Rotate(Vector3.left * Time.deltaTime);
             swordRotated = false;
