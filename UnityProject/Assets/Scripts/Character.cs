@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -99,6 +100,7 @@ public class Character : MonoBehaviour
             invinsibleTimer = 5;
             if(health == 0)
             {
+                SceneManager.LoadScene(2);
                 Destroy(this);
                 player.SetActive(false);
             }
