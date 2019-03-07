@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
@@ -13,20 +14,25 @@ public class Character : MonoBehaviour
     public GameObject sword;
     private bool swordRotated = false;
     public bool right = true;
-    private int health = 1;
+    private int health = 10;
     private int invinsibleTimer;
     public GameObject player;
+    public Slider slider;
+    public Image damaged;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         startingScale = transform.localScale.x;
-        sword.SetActive(false);     
+        sword.SetActive(false);
+        slider.maxValue = health;
+        slider.value = health;
     }
 
     // Update is called once per frame
     void Update()
     {
+        damaged.color = Color.Lerp(damaged.color, Color.clear, 3f * Time.deltaTime);
         if(rb2d.velocity[0] > .1)
         {
             transform.localScale = new Vector2(startingScale, transform.localScale.y);
@@ -97,7 +103,9 @@ public class Character : MonoBehaviour
         else if (col.gameObject.tag == "enemy" && invinsibleTimer == 0)
         {
             health -= 1;
+            slider.value = health;
             invinsibleTimer = 5;
+            damaged.color = new Color(1f, 0f, 0f, .2f);
             if(health == 0)
             {
                 SceneManager.LoadScene(2);
