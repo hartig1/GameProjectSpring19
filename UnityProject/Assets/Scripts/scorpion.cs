@@ -60,7 +60,7 @@ public class scorpion : MonoBehaviour
             health--;
             if (health <= 0)
             {
-                Destroy(this);
+                Destroy(gameObject);
                 scorp.SetActive(false);
             }
             if (dir)
@@ -74,6 +74,16 @@ public class scorpion : MonoBehaviour
                 rb2d.position = new Vector2(rb2d.position[0] + 1f, rb2d.position[1]);
             }
             dir = !dir;
+            timer = 5;
+        }
+        if(col.gameObject.tag == "projectile")
+        {
+            health--;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+                scorp.SetActive(false);
+            }
             timer = 5;
         }
     }
