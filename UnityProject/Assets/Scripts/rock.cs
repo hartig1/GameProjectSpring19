@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class projectile : MonoBehaviour
+public class rock : MonoBehaviour
 {
-    private bool dir;
+    private bool dir = false;
     private Rigidbody2D rb;
-    private bool active;
-    private float forceH = 25f;
-    private float forceV = 5f;
+    private bool active = false;
     public GameObject go;
+    private float forceH = 5f;
+    private bool rolling = false;
     // Start is called before the first frame update
     void Start()
     {
-        active = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (active)
+        if (active && rolling)
         {
             if (dir)
             {
@@ -31,32 +30,21 @@ public class projectile : MonoBehaviour
             }
         }
     }
-
-    public void fire(bool right)
+    public void Drop(bool dir)
     {
-        dir = right;
+        this.dir = dir;
         active = true;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 1;
-        if (dir)
-        {
-            rb.velocity = new Vector2(forceH, forceV);
-            this.transform.right = new Vector3(90,0,0);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-forceH, forceV);
-            this.transform.right = new Vector3(-90, 0, 0);
-        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "ground")
+        if (col.gameObject.tag == "ground")
         {
-            Destroy(gameObject);
+            rolling = true;
         }
-        if(col.gameObject.tag == "enemy")
+        if (col.gameObject.tag == "enemy" || col.gameObject.tag == "player")
         {
             Destroy(gameObject);
         }
