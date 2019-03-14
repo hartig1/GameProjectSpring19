@@ -132,5 +132,18 @@ public class Character : MonoBehaviour
                 player.SetActive(false);
             }
         }
+        else if(col.gameObject.tag == "rock" && invinsibleTimer == 0)
+        {
+            health -= 1;
+            slider.value = health;
+            invinsibleTimer = 5;
+            damaged.color = new Color(1f, 0f, 0f, .2f);
+            if (health == 0)
+            {
+                SceneManager.LoadScene(2);
+                Destroy(this);
+                player.SetActive(false);
+            }
+        }
     }
 }
