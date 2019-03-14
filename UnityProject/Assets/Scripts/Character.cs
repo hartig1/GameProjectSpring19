@@ -19,6 +19,10 @@ public class Character : MonoBehaviour
     public GameObject player;
     public Slider slider;
     public Image damaged;
+    public projectile projectile;
+    private bool hasShot;
+    private int shotTime;
+    private static int shotCoolDown = 25;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,7 @@ public class Character : MonoBehaviour
         sword.SetActive(false);
         slider.maxValue = health;
         slider.value = health;
+        hasShot = false;
     }
 
     // Update is called once per frame
@@ -92,7 +97,21 @@ public class Character : MonoBehaviour
                 rb2d.AddForce(new Vector2(-runForce, 0));
             }
         }
+        if (Input.GetKey("e"))
+        {
+            if (!hasShot)
+            {
+                projectile clone = (Instantiate(projectile, transform.position, transform.rotation)) as projectile;
+                
+                hasShot = true;
+                shotTime = shotCoolDown;
+                clone.fire(right);
+                //clone.rigidbody.AddForce(1000, 0, 0);
+            }
+        }
         if (invinsibleTimer > 0) invinsibleTimer--;
+        if (shotTime > 0) shotTime--;
+        if (shotTime == 0) hasShot = false;
     }
     void OnCollisionEnter2D (Collision2D col)
     {
