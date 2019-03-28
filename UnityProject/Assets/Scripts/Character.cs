@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     public Rigidbody2D rb2d;
+    public int rocks = 0;
     private float jumpForce = 15;
     private float runForce = 25;
     private bool canJump = true;
@@ -23,6 +24,7 @@ public class Character : MonoBehaviour
     private bool hasShot;
     private int shotTime;
     private static int shotCoolDown = 25;
+    public Text ammoText;
     // Start is called before the first frame update
     void Start()
     {
@@ -101,12 +103,16 @@ public class Character : MonoBehaviour
         {
             if (!hasShot)
             {
-                projectile clone = (Instantiate(projectile, transform.position, transform.rotation)) as projectile;
-                
-                hasShot = true;
-                shotTime = shotCoolDown;
-                clone.fire(right);
-                //clone.rigidbody.AddForce(1000, 0, 0);
+                if (rocks > 0)
+                {
+                    projectile clone = (Instantiate(projectile, transform.position, transform.rotation)) as projectile;
+                    hasShot = true;
+                    shotTime = shotCoolDown;
+                    clone.fire(!right);
+                    rocks--;
+                    ammoText.text = "Rocks: " + rocks.ToString();
+                    //clone.rigidbody.AddForce(1000, 0, 0);
+                }
             }
         }
         if (invinsibleTimer > 0) invinsibleTimer--;
@@ -132,18 +138,26 @@ public class Character : MonoBehaviour
                 player.SetActive(false);
             }
         }
-        else if(col.gameObject.tag == "rock" && invinsibleTimer == 0)
+        else if(col.gameObject.tag == "rock")
         {
-            health -= 1;
-            slider.value = health;
-            invinsibleTimer = 5;
-            damaged.color = new Color(1f, 0f, 0f, .2f);
-            if (health == 0)
+            if (invinsibleTimer == 0)
             {
-                SceneManager.LoadScene(2);
-                Destroy(this);
-                player.SetActive(false);
+                health -= 1;
+                slider.value = health;
+                invinsibleTimer = 5;
+                damaged.color = new Color(1f, 0f, 0f, .2f);
+                if (health == 0)
+                {
+                    SceneManager.LoadScene(2);
+                    Destroy(this);
+                    player.SetActive(false);
+                }
             }
+        }
+        else if(col.gameObject.tag == "goodRock")
+        {
+            rocks++;
+            ammoText.text = "Rocks: " + rocks.ToString();
         }
     }
 }

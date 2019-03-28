@@ -5,6 +5,7 @@ using UnityEngine;
 public class RockSpawner : MonoBehaviour
 {
     public rock r;
+    public bool goodRock = false;
     private int spawnTime = 0;
     public int spawnCooldown = 120;
     public bool right;
@@ -20,7 +21,7 @@ public class RockSpawner : MonoBehaviour
         if (spawnTime == 0)
         {
             rock clone = (Instantiate(r, transform.position, transform.rotation)) as rock;
-
+            clone.tag = "goodRock";
             clone.Drop(right);
             spawnTime = spawnCooldown;
             //clone.rigidbody.AddForce(1000, 0, 0);
