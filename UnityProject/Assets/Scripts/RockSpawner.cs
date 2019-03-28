@@ -6,7 +6,7 @@ public class RockSpawner : MonoBehaviour
 {
     public rock r;
     private int spawnTime = 0;
-    private int spawnCooldown = 120;
+    public int spawnCooldown = 120;
     public bool right;
     // Start is called before the first frame update
     void Start()

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
-    private Rigidbody2D rb2d;
-    private float jumpForce = 12;
+    public Rigidbody2D rb2d;
+    private float jumpForce = 15;
     private float runForce = 25;
     private bool canJump = true;
     private float startingScale;
@@ -40,13 +40,13 @@ public class Character : MonoBehaviour
         damaged.color = Color.Lerp(damaged.color, Color.clear, 3f * Time.deltaTime);
         if(rb2d.velocity[0] > .1)
         {
-            transform.localScale = new Vector2(startingScale, transform.localScale.y);
-            right = true;
+            transform.localScale = new Vector2(-startingScale, transform.localScale.y);
+            right = false;
         }
         else if(rb2d.velocity[0] < -.1)
         {
-            transform.localScale = new Vector2(-startingScale, transform.localScale.y);
-            right = false;
+            transform.localScale = new Vector2(startingScale, transform.localScale.y);
+            right = true;
         }
         if (Input.GetMouseButtonDown(0) && !swordRotated)
         {
