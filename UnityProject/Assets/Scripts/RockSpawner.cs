@@ -21,7 +21,10 @@ public class RockSpawner : MonoBehaviour
         if (spawnTime == 0)
         {
             rock clone = (Instantiate(r, transform.position, transform.rotation)) as rock;
-            clone.tag = "goodRock";
+            if (goodRock)
+            {
+                clone.tag = "goodRock";
+            }
             clone.Drop(right);
             spawnTime = spawnCooldown;
             //clone.rigidbody.AddForce(1000, 0, 0);

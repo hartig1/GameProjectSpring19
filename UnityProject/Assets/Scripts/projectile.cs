@@ -10,10 +10,12 @@ public class projectile : MonoBehaviour
     private float forceH = 25f;
     private float forceV = 5f;
     public GameObject go;
+    public Character ch;
     // Start is called before the first frame update
     void Start()
     {
         active = false;
+        Physics2D.IgnoreCollision(ch.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     // Update is called once per frame

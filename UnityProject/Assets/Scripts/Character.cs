@@ -8,8 +8,8 @@ public class Character : MonoBehaviour
 {
     public Rigidbody2D rb2d;
     public int rocks = 0;
-    private float jumpForce = 15;
-    private float runForce = 25;
+    private float jumpForce = 25;
+    private float runForce = 30;
     private bool canJump = true;
     private float startingScale;
     public GameObject sword;
@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
         slider.maxValue = health;
         slider.value = health;
         hasShot = false;
+        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     // Update is called once per frame
