@@ -35,6 +35,7 @@ public class Character : MonoBehaviour
         slider.value = health;
         hasShot = false;
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
