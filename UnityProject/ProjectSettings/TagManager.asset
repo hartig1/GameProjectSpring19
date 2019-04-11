@@ -12,6 +12,9 @@ TagManager:
   - player
   - rock
   - goodRock
+  - lava
+  - basket
+  - Breaker
   layers:
   - Default
   - TransparentFX
@@ -48,6 +51,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Back
+    uniqueID: 3711781587
     locked: 0
   - name: Ground
     uniqueID: 233353785

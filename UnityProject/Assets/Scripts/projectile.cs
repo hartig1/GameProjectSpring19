@@ -8,7 +8,7 @@ public class projectile : MonoBehaviour
     private Rigidbody2D rb;
     private bool active;
     private float forceH = 25f;
-    private float forceV = 5f;
+    private float forceV = 15f;
     public GameObject go;
     public Character ch;
     // Start is called before the first frame update
@@ -58,7 +58,11 @@ public class projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if(col.gameObject.tag == "enemy")
+        else if(col.gameObject.tag == "enemy")
+        {
+            Destroy(gameObject);
+        }
+        else if (col.gameObject.tag == "basket")
         {
             Destroy(gameObject);
         }
