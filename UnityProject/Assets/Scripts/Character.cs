@@ -8,32 +8,42 @@ public class Character : MonoBehaviour
 {
     public Rigidbody2D rb2d;
     public int rocks = 0;
-    private float jumpForce = 15;
-    private float runForce = 25;
+    public float jumpForce = 25;
+    public float runForce = 30;
     private bool canJump = true;
     private float startingScale;
     public GameObject sword;
     private bool swordRotated = false;
     public bool right = true;
-    private int health = 10;
+    private int health = 6;
     private int invinsibleTimer;
+    private int invinsibleTime = 80;
     public GameObject player;
-    public Slider slider;
     public Image damaged;
     public projectile projectile;
     private bool hasShot;
     private int shotTime;
     private static int shotCoolDown = 25;
     public Text ammoText;
+    public Image HF1, HF2, HF3, HH1, HH2, HH3, HE1, HE2, HE3; //heart full/half/empty
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         startingScale = transform.localScale.x;
         sword.SetActive(false);
-        slider.maxValue = health;
-        slider.value = health;
         hasShot = false;
+        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
+        HF1.enabled = true;
+        HF2.enabled = true;
+        HF3.enabled = true;
+        HH1.enabled = false;
+        HH2.enabled = false;
+        HH3.enabled = false;
+        HE1.enabled = false;
+        HE2.enabled = false;
+        HE3.enabled = false;
     }
 
     // Update is called once per frame
@@ -106,6 +116,7 @@ public class Character : MonoBehaviour
                 if (rocks > 0)
                 {
                     projectile clone = (Instantiate(projectile, transform.position, transform.rotation)) as projectile;
+                    clone.transform.position = new Vector3(clone.transform.position.x, clone.transform.position.y, 1);
                     hasShot = true;
                     shotTime = shotCoolDown;
                     clone.fire(!right);
@@ -128,8 +139,8 @@ public class Character : MonoBehaviour
         else if (col.gameObject.tag == "enemy" && invinsibleTimer == 0)
         {
             health -= 1;
-            slider.value = health;
-            invinsibleTimer = 5;
+            updateHealth();
+            invinsibleTimer = invinsibleTime;
             damaged.color = new Color(1f, 0f, 0f, .2f);
             if(health == 0)
             {
@@ -143,8 +154,8 @@ public class Character : MonoBehaviour
             if (invinsibleTimer == 0)
             {
                 health -= 1;
-                slider.value = health;
-                invinsibleTimer = 5;
+                updateHealth();
+                invinsibleTimer = invinsibleTime;
                 damaged.color = new Color(1f, 0f, 0f, .2f);
                 if (health == 0)
                 {
@@ -158,6 +169,106 @@ public class Character : MonoBehaviour
         {
             rocks++;
             ammoText.text = "Rocks: " + rocks.ToString();
+        }
+        else if(col.gameObject.tag == "lava" && invinsibleTimer == 0)
+        {
+            health -= 1;
+            updateHealth();
+            invinsibleTimer = invinsibleTime;
+            damaged.color = new Color(1f, 0f, 0f, .2f);
+            if (health == 0)
+            {
+                SceneManager.LoadScene(2);
+                Destroy(this);
+                player.SetActive(false);
+            }
+        }
+    }
+    private void updateHealth()
+    {
+        if(health == 0)
+        {
+            HF1.enabled = false; 
+            HF2.enabled = false;
+            HF3.enabled = false;
+            HH1.enabled = false;
+            HH2.enabled = false;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = false;
+            HE3.enabled = false;
+        }
+        else if(health == 1)
+        {
+            HF1.enabled = false;
+            HF2.enabled = false;
+            HF3.enabled = false;
+            HH1.enabled = true;
+            HH2.enabled = false;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = true;
+            HE3.enabled = true;
+        }
+        else if (health == 2)
+        {
+            HF1.enabled = true;
+            HF2.enabled = false;
+            HF3.enabled = false;
+            HH1.enabled = false;
+            HH2.enabled = false;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = true;
+            HE3.enabled = true;
+        }
+        else if (health == 3)
+        {
+            HF1.enabled = true;
+            HF2.enabled = false;
+            HF3.enabled = false;
+            HH1.enabled = false;
+            HH2.enabled = true;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = false;
+            HE3.enabled = true;
+        }
+        else if (health == 4)
+        {
+            HF1.enabled = true;
+            HF2.enabled = true;
+            HF3.enabled = false;
+            HH1.enabled = false;
+            HH2.enabled = false;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = false;
+            HE3.enabled = true;
+        }
+        else if (health == 5)
+        {
+            HF1.enabled = true;
+            HF2.enabled = true;
+            HF3.enabled = false;
+            HH1.enabled = false;
+            HH2.enabled = false;
+            HH3.enabled = true;
+            HE1.enabled = false;
+            HE2.enabled = false;
+            HE3.enabled = false;
+        }
+        else if (health == 6)
+        {
+            HF1.enabled = true;
+            HF2.enabled = true;
+            HF3.enabled = true;
+            HH1.enabled = false;
+            HH2.enabled = false;
+            HH3.enabled = false;
+            HE1.enabled = false;
+            HE2.enabled = false;
+            HE3.enabled = false;
         }
     }
 }
