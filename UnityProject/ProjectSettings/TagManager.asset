@@ -15,6 +15,7 @@ TagManager:
   - lava
   - basket
   - Breaker
+  - warp
   layers:
   - Default
   - TransparentFX

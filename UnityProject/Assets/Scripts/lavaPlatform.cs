@@ -6,39 +6,47 @@ public class lavaPlatform : MonoBehaviour
 {
     private Vector3 start;
     private Vector3 target;
-    private float transitionTime = 20f;
     private int timeRemaining;
+    public float x = 0;
+    public float y = 10;
+    private bool lower = false;
+    private bool raise = false;
+    private float speed = 1;
+    private float t = 0;
     // Start is called before the first frame update
     void Start()
     {
         start = transform.localPosition;
-        target = start - new Vector3(0, 2, 0);
+        target = start - new Vector3(x, y, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (lower)
+        {
+            t += Time.deltaTime / speed;
+            transform.position = Vector3.Lerp(start, target, t);
+            if (t >= 1)
+            {
+                lower = false;
+                raise = true;
+                t = 0;
+            }
+        }
+        else if(raise)
+        {
+            t += Time.deltaTime / speed;
+            transform.position = Vector3.Lerp(target, start, t);
+            if (t >= 1) raise = false;
+        }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "player")
+        if (col.gameObject.tag == "player" && transform.position == start)
         {
-            timeRemaining = 2;
-            transform.position = Vector3.Lerp(transform.localPosition, target, transitionTime);
-            Invoke("_tick", 1f);
-        }
-    }
-    private void _tick()
-    {
-        timeRemaining--;
-        if (timeRemaining > 0)
-        {
-            Invoke("_tick", 1f);
-        }
-        else
-        {
-            transform.position = Vector3.Lerp(target, start, transitionTime);
+            lower = true;
+            t = 0;
         }
     }
 }

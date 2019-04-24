@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
     private static int shotCoolDown = 25;
     public Text ammoText;
     public Image HF1, HF2, HF3, HH1, HH2, HH3, HE1, HE2, HE3; //heart full/half/empty
+    public int warp;
     // Start is called before the first frame update
     void Start()
     {
@@ -182,6 +183,11 @@ public class Character : MonoBehaviour
                 Destroy(this);
                 player.SetActive(false);
             }
+        } else if(col.gameObject.tag == "warp")
+        {
+            SceneManager.LoadScene(warp);
+            Destroy(this);
+            player.SetActive(false);
         }
     }
     private void updateHealth()
