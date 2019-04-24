@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Terrain.unity
     guid: fda4cb5e774531943b86b487dc211fc7
+  - enabled: 1
+    path: Assets/Scenes/Cave.unity
+    guid: 64ea4f5570a07c64c99847070344390c
+  - enabled: 1
+    path: Assets/Scenes/BossEx.unity
+    guid: 16f7ef862273bc3468ba996f6aad10bf
   m_configObjects: {}

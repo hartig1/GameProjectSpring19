@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class breakable : MonoBehaviour
 {
+    public lift l;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class breakable : MonoBehaviour
     {
         if (col.gameObject.tag == "Breaker")
         {
+            l.move(15f);
             Destroy(col.gameObject);
             Destroy(gameObject);
         }

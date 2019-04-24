@@ -5,7 +5,7 @@ using UnityEngine;
 public class basket : MonoBehaviour
 {
     public lift l;
-    private int hits = 3;
+    private int hits = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +24,11 @@ public class basket : MonoBehaviour
         {
             if (hits != 0)
             {
-                transform.position = Vector3.Lerp(transform.localPosition, transform.localPosition - new Vector3(0, 2, 0), 1f);
+                //transform.position = Vector3.Lerp(transform.localPosition, transform.localPosition - new Vector3(0, 2, 0), 1f);
                 hits -= 1;
                 if(hits == 0)
                 {
-                    l.move(10f);
+                    l.move(5f);
                 }
             }
         }

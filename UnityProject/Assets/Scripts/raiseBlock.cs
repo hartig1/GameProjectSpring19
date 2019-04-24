@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lavaPlatform : MonoBehaviour
+public class raiseBlock : MonoBehaviour
 {
     private Vector3 start;
     private Vector3 target;
-    private int timeRemaining;
     public float x = 0;
     public float y = 10;
-    private bool lower = false;
-    private bool raise = false;
-    private float speed = 1;
+    private float speed = 10;
     private float t = 0;
+    private bool raise = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,29 +21,17 @@ public class lavaPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lower)
+        if (raise)
         {
             t += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(start, target, t);
-            if (t >= 1)
-            {
-                lower = false;
-                raise = true;
-                t = 0;
-            }
-        }
-        else if(raise)
-        {
-            t += Time.deltaTime / speed;
-            transform.position = Vector3.Lerp(target, start, t);
-            if (t >= 1) raise = false;
         }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "player" && transform.position == start)
+        if (col.gameObject.tag == "player" && transform.position != start && !raise)
         {
-            lower = true;
+            raise = true;
             t = 0;
         }
     }
