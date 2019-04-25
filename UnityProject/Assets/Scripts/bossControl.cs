@@ -14,8 +14,8 @@ public class bossControl : MonoBehaviour
     public Rigidbody2D rb2d;
     private float startingScale;
     public GameObject boss;
-    private int health = 50;
-    private int maxHealth = 50;
+    private int health = 6;
+    private int maxHealth = 6;
     public int attack = 0;
     public bool idle = true;
     private int hiddenTimer = 0;
