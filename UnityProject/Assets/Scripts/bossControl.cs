@@ -5,12 +5,6 @@ using UnityEngine.Assertions;
 
 public class bossControl : MonoBehaviour
 {
-    //My ideas are as follows:
-    //The boss does not move from the side of the screen
-    //It fires fireballs and flaming stones at you
-    //Flaming stones will cool down, allowing you to pick them up and throw them at the boss
-    //Touching the boss will hurt you
-
     public Rigidbody2D rb2d;
     private float startingScale;
     public GameObject boss;
@@ -22,6 +16,7 @@ public class bossControl : MonoBehaviour
     private int chargeTimer = 0;
     private int attaTimer = 0;
     public GameObject fireSpawn;
+    public GameObject rockSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +55,7 @@ public class bossControl : MonoBehaviour
                             idle = false;
                             break;
 
-                        case 3: //Rockslide
+                        case 3: //Rockslide (Not Used)
                             attaTimer = 15;
                             idle = false;
                             break;
@@ -113,7 +108,7 @@ public class bossControl : MonoBehaviour
                 return (0);
                 break;
 
-            case 3: //Rockslide
+            case 3: //Rockslide (Not Used)
                 return (0);
                 break;
 
