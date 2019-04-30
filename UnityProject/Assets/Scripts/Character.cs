@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Character : MonoBehaviour
     public Text ammoText;
     public Image HF1, HF2, HF3, HH1, HH2, HH3, HE1, HE2, HE3; //heart full/half/empty
     public int warp;
+    private float freezeJump = .25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class Character : MonoBehaviour
         HE1.enabled = false;
         HE2.enabled = false;
         HE3.enabled = false;
+        ammoText.text = "Rocks: " + rocks.ToString();
     }
 
     // Update is called once per frame
@@ -96,18 +99,41 @@ public class Character : MonoBehaviour
             rb2d.velocity = new Vector2(rb2d.velocity[0], jumpForce);
             canJump = false;
         }
+        if(!canJump && Math.Abs(rb2d.velocity[1]) < .01)
+        {
+            //Time.deltaTime;
+        }
         if (Input.GetKey("d"))
         {
-            if (rb2d.velocity[0] < runForce)
+            //if (rb2d.velocity[0] < runForce)
+            //{
+            //rb2d.AddForce(new Vector2(runForce, 0));
+            rb2d.velocity = new Vector2(runForce, rb2d.velocity[1]);
+            //}
+        }
+        if (Input.GetKeyUp("d"))
+        {
+            if (Math.Abs(rb2d.velocity[1]) < .1)
             {
-                rb2d.AddForce(new Vector2(runForce, 0));
+                rb2d.velocity = new Vector2(rb2d.velocity[0] / 10, rb2d.velocity[1]);
             }
         }
         if (Input.GetKey("a"))
         {
-            if (rb2d.velocity[0] > -runForce)
+            //if (rb2d.velocity[0] > -runForce)
+            //{
+            //rb2d.AddForce(new Vector2(-runForce, 0));
+            if (Math.Abs(rb2d.velocity[1]) < .1)
             {
-                rb2d.AddForce(new Vector2(-runForce, 0));
+                rb2d.velocity = new Vector2(-runForce, rb2d.velocity[1]);
+            }
+            //}
+        }
+        if (Input.GetKeyUp("a"))
+        {
+            if (Math.Abs(rb2d.velocity[1]) < .1)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity[0] / 10, rb2d.velocity[1]);
             }
         }
         if (Input.GetKey("e"))
@@ -136,6 +162,7 @@ public class Character : MonoBehaviour
         if (col.gameObject.tag == "ground")
         {
             canJump = true;
+            rb2d.velocity = new Vector2(0, 0);
         }
         else if (col.gameObject.tag == "enemy" && invinsibleTimer == 0)
         {

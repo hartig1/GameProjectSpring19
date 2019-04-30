@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3401,7 +3401,7 @@ Camera:
   far clip plane: 1000
   field of view: 26.991467
   orthographic: 1
-  orthographic size: 21.97795
+  orthographic size: 18
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3425,7 +3425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789786683}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.8, y: 24.400002, z: -83.73001}
+  m_LocalPosition: {x: -23.8, y: 18, z: -83.73001}
   m_LocalScale: {x: 1.30251, y: 1.30251, z: 1.30251}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3713,8 +3713,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.546729, y: -0.57971746}
-  - {x: 1.546729, y: -0.5936841}
+  - {x: -1.5811005, y: -0.52815694}
+  - {x: 1.5811005, y: -0.52493614}
 --- !u!1 &939460416
 GameObject:
   m_ObjectHideFlags: 0
@@ -5654,10 +5654,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.7633387, y: 0.04345332}
+  - {x: -1.6915318, y: -0.26173487}
   - {x: -1.5924644, y: -0.64735234}
   - {x: 1.5730869, y: -0.6492515}
-  - {x: 1.7757361, y: 0.15178463}
+  - {x: 1.6859775, y: -0.2252119}
 --- !u!1 &1518298655
 GameObject:
   m_ObjectHideFlags: 0
