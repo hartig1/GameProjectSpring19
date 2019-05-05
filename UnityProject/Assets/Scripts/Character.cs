@@ -162,7 +162,13 @@ public class Character : MonoBehaviour
     }
     void OnCollisionEnter2D (Collision2D col)
     {
-        if (col.gameObject.tag == "ground")
+        if(col.gameObject.tag == "KillWall")
+        {
+            SceneManager.LoadScene(2);
+            Destroy(this);
+            player.SetActive(false);
+        }
+        else if (col.gameObject.tag == "ground")
         {
             canJump = true;
             rb2d.velocity = new Vector2(0, 0);

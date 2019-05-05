@@ -16,6 +16,7 @@ TagManager:
   - basket
   - Breaker
   - warp
+  - KillWall
   layers:
   - Default
   - TransparentFX
