@@ -94,14 +94,20 @@ public class Character : MonoBehaviour
             //sword.transform.Rotate(Vector3.left * Time.deltaTime);
             swordRotated = false;
         }
-        if ((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && canJump)
+        if((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && Input.GetKey("a") && canJump)
+        {
+            rb2d.velocity = new Vector2(-runForce, jumpForce);
+            canJump = false;
+        }
+        else if ((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && Input.GetKey("d") && canJump)
+        {
+            rb2d.velocity = new Vector2(runForce, jumpForce);
+            canJump = false;
+        }
+        else if ((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && canJump)
         {
             rb2d.velocity = new Vector2(rb2d.velocity[0], jumpForce);
             canJump = false;
-        }
-        if(!canJump && Math.Abs(rb2d.velocity[1]) < .01)
-        {
-            //Time.deltaTime;
         }
         if (Input.GetKey("d"))
         {
@@ -120,9 +126,6 @@ public class Character : MonoBehaviour
         }
         if (Input.GetKey("a"))
         {
-            //if (rb2d.velocity[0] > -runForce)
-            //{
-            //rb2d.AddForce(new Vector2(-runForce, 0));
             if (Math.Abs(rb2d.velocity[1]) < .1)
             {
                 rb2d.velocity = new Vector2(-runForce, rb2d.velocity[1]);

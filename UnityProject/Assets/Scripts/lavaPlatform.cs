@@ -6,6 +6,7 @@ public class lavaPlatform : MonoBehaviour
 {
     private Vector3 start;
     private Vector3 target;
+    private Vector3 stopped;
     private int timeRemaining;
     public float x = 0;
     public float y = 10;
@@ -31,16 +32,18 @@ public class lavaPlatform : MonoBehaviour
             {
                 lower = false;
                 raise = true;
+                stopped = transform.localPosition;
                 t = 0;
             }
         }
         else if(raise)
         {
             t += Time.deltaTime / speed;
-            transform.position = Vector3.Lerp(target, start, t);
+            transform.position = Vector3.Lerp(stopped, start, t);
             if (t >= 1) raise = false;
         }
     }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "player" && transform.position == start)
