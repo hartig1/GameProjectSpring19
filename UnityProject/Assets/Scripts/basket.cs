@@ -29,6 +29,7 @@ public class basket : MonoBehaviour
                 if(hits == 0)
                 {
                     l.move(5f);
+                    hits = 1;
                 }
             }
         }

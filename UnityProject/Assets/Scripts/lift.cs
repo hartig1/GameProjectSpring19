@@ -26,13 +26,21 @@ public class lift : MonoBehaviour
         {
             t += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(start, target, t);
-            if (t >= 1) lower = false;
+            if (t >= 1)
+            {
+                lower = false;
+                t = 0;
+            }
         }
         else if(raise)
         {
             t += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(target, start, t);
-            if (t >= 1) raise = false;
+            if (t >= 1)
+            {
+                t = 0;
+                raise = false;
+            }
         }
     }
     public void move(float _speed)
