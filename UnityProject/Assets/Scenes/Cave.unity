@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: -55
+  lowerable: 1
 --- !u!61 &37680519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -859,13 +860,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146296762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06ff52bd3c105fb40b8a28a57fa10d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   x: 0
   y: -110
+  lowerable: 1
 --- !u!212 &146296764
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -921,14 +923,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146296762}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.2, y: -250, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
-  m_Children:
-  - {fileID: 530491277}
-  - {fileID: 196057263}
-  m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -38.56, y: -3.33, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 196057263}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &146296766
 EdgeCollider2D:
@@ -1096,7 +1096,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158012812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 231, y: -92.8, z: 0}
+  m_LocalPosition: {x: 231, y: -92.8, z: 1}
   m_LocalScale: {x: 3, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1187,6 +1187,7 @@ GameObject:
   - component: {fileID: 196057263}
   - component: {fileID: 196057265}
   - component: {fileID: 196057264}
+  - component: {fileID: 196057266}
   m_Layer: 0
   m_Name: Sinking Platform (9)
   m_TagString: ground
@@ -1202,11 +1203,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196057262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.56, y: 5.0100007, z: -6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 146296765}
-  m_RootOrder: 1
+  m_LocalPosition: {x: 431.80002, y: -175, z: -6}
+  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_Children:
+  - {fileID: 146296765}
+  - {fileID: 530491277}
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &196057264
 BoxCollider2D:
@@ -1282,6 +1285,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &196057266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196057262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ff52bd3c105fb40b8a28a57fa10d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: -85
+  lowerable: 0
 --- !u!1 &216348799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,7 +1895,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377976979}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.979999, y: -2.9666672, z: 0}
+  m_LocalPosition: {x: -9.979999, y: -2.9666672, z: -1}
   m_LocalScale: {x: 0.3, y: 0.8333334, z: 1}
   m_Children: []
   m_Father: {fileID: 37680522}
@@ -2699,11 +2717,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530491276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0.2, z: 0}
+  m_LocalPosition: {x: -38.66, y: -3.33, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 146296765}
-  m_RootOrder: 0
+  m_Father: {fileID: 196057263}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &530491278
 SpriteRenderer:
@@ -3703,6 +3721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 43
+  lowerable: 1
 --- !u!212 &871941082
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4012,6 +4031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   l: {fileID: 1518913558}
+  l2: {fileID: 0}
 --- !u!68 &1035326675
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -5901,6 +5921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 83
+  lowerable: 1
 --- !u!212 &1518913559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6243,7 +6264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec2b93e100b49b4388716cf9ccef459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  l: {fileID: 146296763}
+  l: {fileID: 196057266}
+  l2: {fileID: 871941081}
 --- !u!68 &1609536309
 EdgeCollider2D:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class lift : MonoBehaviour
     private bool raise = false;
     private float speed = 10;
     private float t = 0;
+    public bool lowerable = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +51,7 @@ public class lift : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "player" && transform.position != start && !raise)
+        if (col.gameObject.tag == "player" && transform.position != start && !raise && lowerable)
         {
             raise = true;
             t = 0;
