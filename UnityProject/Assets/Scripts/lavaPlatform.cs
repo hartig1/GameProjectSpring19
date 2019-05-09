@@ -14,6 +14,7 @@ public class lavaPlatform : MonoBehaviour
     private bool raise = false;
     private float speed = 1;
     private float t = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +25,21 @@ public class lavaPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lower)
+        if (raise)
+        {
+            t += Time.deltaTime / speed;
+            transform.localPosition = Vector3.Lerp(stopped, start, t);
+            if (t >= 1)
+            {
+                raise = false;
+                t = 0;
+            }
+        }
+        else if (lower)
         {
             t += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(start, target, t);
+            stopped = transform.position;
             if (t >= 1)
             {
                 lower = false;
@@ -36,12 +48,6 @@ public class lavaPlatform : MonoBehaviour
                 t = 0;
             }
         }
-        else if(raise)
-        {
-            t += Time.deltaTime / speed;
-            transform.position = Vector3.Lerp(stopped, start, t);
-            if (t >= 1) raise = false;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -49,7 +55,14 @@ public class lavaPlatform : MonoBehaviour
         if (col.gameObject.tag == "player" && transform.position == start)
         {
             lower = true;
-            t = 0;
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "player")
+        {
+            lower = true;
         }
     }
 }

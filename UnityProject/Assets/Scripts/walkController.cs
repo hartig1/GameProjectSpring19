@@ -17,15 +17,15 @@ public class walkController : MonoBehaviour
     {
         if(player.rb2d.velocity[0] >= .01 && player.rb2d.velocity[1] <= .01)
         {
-            walk.Play("Armature|ArmatureAction");
+            walk.Play("Walk Animation");
         }
         if (Input.GetKey("d"))
         {
-            walk.Play("Armature|ArmatureAction");
+            walk.Play("Walk Animation");
         }
         else if (Input.GetKey("a"))
         {
-            walk.Play("Armature|ArmatureAction");
+            walk.Play("Walk Animation");
         }
     }
 }
