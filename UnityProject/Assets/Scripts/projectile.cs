@@ -9,6 +9,7 @@ public class projectile : MonoBehaviour
     private bool active;
     private float forceH = 25f;
     private float forceV = 15f;
+    public breakable platform;
     public GameObject go;
     public Character ch;
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class projectile : MonoBehaviour
     {
         active = false;
         Physics2D.IgnoreCollision(ch.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(platform.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     // Update is called once per frame

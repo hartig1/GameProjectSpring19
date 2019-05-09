@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     public GameObject player;
     public Image damaged;
     public projectile projectile;
+    public breakable platform;
     private bool hasShot;
     private int shotTime;
     private static int shotCoolDown = 25;
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour
         sword.SetActive(false);
         hasShot = false;
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(platform.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
         HF1.enabled = true;
         HF2.enabled = true;
@@ -119,14 +121,14 @@ public class Character : MonoBehaviour
         }
         if (Input.GetKeyUp("d"))
         {
-            if (Math.Abs(rb2d.velocity[1]) < .1)
+            if (Math.Abs(rb2d.velocity[1]) < .25)
             {
                 rb2d.velocity = new Vector2(rb2d.velocity[0] / 10, rb2d.velocity[1]);
             }
         }
         if (Input.GetKey("a"))
         {
-            if (Math.Abs(rb2d.velocity[1]) < .1)
+            if (Math.Abs(rb2d.velocity[1]) < .25)
             {
                 rb2d.velocity = new Vector2(-runForce, rb2d.velocity[1]);
             }
