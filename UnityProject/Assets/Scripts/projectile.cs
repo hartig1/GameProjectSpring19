@@ -27,11 +27,11 @@ public class projectile : MonoBehaviour
         {
             if (dir)
             {
-                rb.velocity = new Vector2(forceH, rb.velocity[1]);
+                rb.velocity = new Vector2(forceH, forceV);
             }
             else
             {
-                rb.velocity = new Vector2(-forceH, rb.velocity[1]);
+                rb.velocity = new Vector2(-forceH, forceV);
             }
         }
     }
@@ -45,12 +45,12 @@ public class projectile : MonoBehaviour
         if (dir)
         {
             rb.velocity = new Vector2(forceH, forceV);
-            this.transform.right = new Vector3(90,0,0);
+            //this.transform.right = new Vector3(90,0,0);
         }
         else
         {
             rb.velocity = new Vector2(-forceH, forceV);
-            this.transform.right = new Vector3(-90, 0, 0);
+            //this.transform.right = new Vector3(-90, 0, 0);
         }
     }
 

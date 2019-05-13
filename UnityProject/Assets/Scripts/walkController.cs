@@ -10,22 +10,30 @@ public class walkController : MonoBehaviour
     void Start()
     {
         walk = GetComponent<Animator>();
+        //walk.SetBool("Idle", true);
+        walk.ResetTrigger("Throw");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.rb2d.velocity[0] >= .01 && player.rb2d.velocity[1] <= .01)
+        //Debug.Log(walk.GetBool("Idle"));
+        if (walk.GetBool("Idle"))
         {
-            walk.Play("Walk Animation");
-        }
-        if (Input.GetKey("d"))
-        {
-            walk.Play("Walk Animation");
-        }
-        else if (Input.GetKey("a"))
-        {
-            walk.Play("Walk Animation");
+            if (Input.GetKey("d"))
+            {
+                //Debug.Log("Jump");
+                //walk.Play("Throw Animation", 0, 0);
+                //walk.SetBool("Idle", false);
+                walk.ResetTrigger("Throw");
+                walk.SetTrigger("Throw");
+            }
+            else if (Input.GetKey("a"))
+            {
+                //Debug.Log("Jump");
+                //walk.Play("Throw Animation", 0, 0);
+                //walk.SetBool("Idle", false);
+            }
         }
     }
 }

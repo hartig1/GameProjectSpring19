@@ -30,10 +30,12 @@ public class Character : MonoBehaviour
     public Image HF1, HF2, HF3, HH1, HH2, HH3, HE1, HE2, HE3; //heart full/half/empty
     public int warp;
     private float freezeJump = .25f;
+    private Animator myAnimator;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
         startingScale = transform.localScale.x;
         sword.SetActive(false);
         hasShot = false;
@@ -65,6 +67,16 @@ public class Character : MonoBehaviour
         {
             transform.localScale = new Vector2(startingScale, transform.localScale.y);
             right = true;
+        }
+        if(rb2d.velocity[1] < -10 && !canJump)
+        {
+            myAnimator.SetBool("JumpUp", false);
+            myAnimator.SetBool("JumpDown", true);
+        }
+        else if(rb2d.velocity[1] < -30)
+        {
+            myAnimator.SetBool("JumpUp", false);
+            myAnimator.SetBool("JumpDown", true);
         }
         if (Input.GetMouseButtonDown(0) && !swordRotated)
         {
@@ -99,16 +111,22 @@ public class Character : MonoBehaviour
         if((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && Input.GetKey("a") && canJump)
         {
             rb2d.velocity = new Vector2(-runForce, jumpForce);
+            Debug.Log("Jump");
+            myAnimator.SetBool("JumpUp", true);
             canJump = false;
         }
         else if ((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && Input.GetKey("d") && canJump)
         {
             rb2d.velocity = new Vector2(runForce, jumpForce);
+            Debug.Log("Jump");
+            myAnimator.SetBool("JumpUp", true);
             canJump = false;
         }
         else if ((Input.GetKeyDown("w") || Input.GetKeyDown("space")) && canJump)
         {
             rb2d.velocity = new Vector2(rb2d.velocity[0], jumpForce);
+            Debug.Log("Jump");
+            myAnimator.SetBool("JumpUp", true);
             canJump = false;
         }
         if (Input.GetKey("d"))
@@ -117,10 +135,12 @@ public class Character : MonoBehaviour
             //{
             //rb2d.AddForce(new Vector2(runForce, 0));
             rb2d.velocity = new Vector2(runForce, rb2d.velocity[1]);
+            myAnimator.SetBool("Walking", true);
             //}
         }
         if (Input.GetKeyUp("d"))
         {
+            myAnimator.SetBool("Walking", false);
             if (Math.Abs(rb2d.velocity[1]) < .25)
             {
                 rb2d.velocity = new Vector2(rb2d.velocity[0] / 10, rb2d.velocity[1]);
@@ -128,14 +148,12 @@ public class Character : MonoBehaviour
         }
         if (Input.GetKey("a"))
         {
-            if (Math.Abs(rb2d.velocity[1]) < .25)
-            {
-                rb2d.velocity = new Vector2(-runForce, rb2d.velocity[1]);
-            }
-            //}
+            rb2d.velocity = new Vector2(-runForce, rb2d.velocity[1]);
+            myAnimator.SetBool("Walking", true);
         }
         if (Input.GetKeyUp("a"))
         {
+            myAnimator.SetBool("Walking", false);
             if (Math.Abs(rb2d.velocity[1]) < .1)
             {
                 rb2d.velocity = new Vector2(rb2d.velocity[0] / 10, rb2d.velocity[1]);
@@ -145,10 +163,11 @@ public class Character : MonoBehaviour
         {
             if (!hasShot)
             {
-                if (rocks > 0)
+                if (rocks != 0)
                 {
-                    projectile clone = (Instantiate(projectile, transform.position, transform.rotation)) as projectile;
-                    clone.transform.position = new Vector3(clone.transform.position.x, clone.transform.position.y, 1);
+                    myAnimator.SetBool("Throwing",true);
+                    projectile clone = (Instantiate(projectile, transform.position + new Vector3(-4,7,0), transform.rotation)) as projectile;
+                    //clone.transform.position = new Vector3(clone.transform.position.x, clone.transform.position.y, 1);
                     hasShot = true;
                     shotTime = shotCoolDown;
                     clone.fire(!right);
@@ -157,10 +176,18 @@ public class Character : MonoBehaviour
                     //clone.rigidbody.AddForce(1000, 0, 0);
                 }
             }
+            else
+            {
+                myAnimator.SetBool("Throwing", false);
+            }
         }
         if (invinsibleTimer > 0) invinsibleTimer--;
         if (shotTime > 0) shotTime--;
-        if (shotTime == 0) hasShot = false;
+        if (shotTime == 0)
+        {
+            hasShot = false;
+            myAnimator.SetBool("Throwing", false);
+        }
     }
     void OnCollisionEnter2D (Collision2D col)
     {
@@ -174,6 +201,8 @@ public class Character : MonoBehaviour
         {
             canJump = true;
             rb2d.velocity = new Vector2(0, 0);
+            myAnimator.SetBool("JumpDown", false);
+            myAnimator.SetBool("JumpUp", false);
         }
         else if (col.gameObject.tag == "enemy" && invinsibleTimer == 0)
         {
