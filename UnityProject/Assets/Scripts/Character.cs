@@ -193,7 +193,7 @@ public class Character : MonoBehaviour
     {
         if(col.gameObject.tag == "KillWall")
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
             Destroy(this);
             player.SetActive(false);
         }
@@ -212,7 +212,7 @@ public class Character : MonoBehaviour
             damaged.color = new Color(1f, 0f, 0f, .2f);
             if(health == 0)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(1);
                 Destroy(this);
                 player.SetActive(false);
             }
@@ -227,7 +227,7 @@ public class Character : MonoBehaviour
                 damaged.color = new Color(1f, 0f, 0f, .2f);
                 if (health == 0)
                 {
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(1);
                     Destroy(this);
                     player.SetActive(false);
                 }
@@ -246,7 +246,7 @@ public class Character : MonoBehaviour
             damaged.color = new Color(1f, 0f, 0f, .2f);
             if (health == 0)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(1);
                 Destroy(this);
                 player.SetActive(false);
             }

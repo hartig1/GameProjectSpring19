@@ -22,7 +22,7 @@ public class breakable : MonoBehaviour
         if (col.gameObject.tag == "Breaker")
         {
             l.move(15f);
-            Destroy(l2.gameObject);
+            if(l2 != null) Destroy(l2.gameObject);
             Destroy(col.gameObject);
             Destroy(gameObject);
         }

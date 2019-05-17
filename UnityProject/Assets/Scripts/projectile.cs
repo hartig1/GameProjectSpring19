@@ -56,6 +56,8 @@ public class projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        //rb.constraints = new RigidbodyConstraints2D();
+        Destroy(gameObject);
         if(col.gameObject.tag == "ground")
         {
             Destroy(gameObject);
